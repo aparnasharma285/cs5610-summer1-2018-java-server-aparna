@@ -1,7 +1,9 @@
-package com.webdev.summer.services;
+package webdev.services;
 
-import com.webdev.summer.models.User;
-import com.webdev.summer.repositories.UserRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import webdev.models.User;
+import webdev.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +25,13 @@ public class UserService {
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
+
+    @PostMapping("/api/users")
+    public User createUser(@RequestBody User user){
+
+        return userRepository.save(user);
+    }
+
+
 
 }

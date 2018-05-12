@@ -1,4 +1,4 @@
-package com.webdev.summer.models;
+package webdev.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private long id;
+    private int id;
 
     @Getter
     @Setter

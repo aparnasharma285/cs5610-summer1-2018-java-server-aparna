@@ -1,4 +1,4 @@
-package com.webdev.summer.models;
+package webdev.models;
 
 import javax.persistence.Entity;
 
