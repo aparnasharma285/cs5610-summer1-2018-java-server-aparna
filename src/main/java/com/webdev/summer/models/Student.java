@@ -1,6 +1,9 @@
 package com.webdev.summer.models;
 
-public class Student extends Person {
+import javax.persistence.Entity;
+
+@Entity
+public class Student extends User {
 
 
 }
