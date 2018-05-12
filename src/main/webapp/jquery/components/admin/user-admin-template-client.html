@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/simplex/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="user-admin.style.client.css" rel="stylesheet"/>
+    <title>Course Manager</title>
+    <script src="../services/user.service.client.js"></script>
+    <script src="user-admin.controller.client.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>User Admin </h1>
+
+    <table class="table table-hover" id="userdata">
+        <thead>
+        <tr class="table-active">
+            <th>Username</th>
+            <th>Password</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Role</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tr>
+            <td><input id="usernameFld" class="form-control" placeholder="Username"></td>
+            <td><input id="passwordFld" class="form-control" placeholder="Password" type="password"></td>
+            <td><input id="firstNameFld" class="form-control" placeholder="FirstName"></td>
+            <td><input id="lastNameFld" class="form-control" placeholder="LastName"></td>
+            <td><select id="roleFld" class="form-control">
+                <option value="FACULTY">Faculty</option>
+                <option value="STUDENT">Student</option>
+            </select></td>
+            <td><span class="float-right" style="white-space: nowrap">
+                 <i class="fa fa-search"></i>
+                <i class="fa fa-user-plus"></i>
+                <i class="fa fa-user-edit"></i>
+            </span>
+            </td>
+        </tr>
+        <tbody class="wbdv-tbody">
+        <tr class="wbdv-template wbdv-user wbdv-hidden">
+            <td class="wbdv-username"></td>
+            <td>&nbsp;</td>
+            <td class="wbdv-first-name">Ada</td>
+            <td class="wbdv-last-name">Lovelace</td>
+            <td class="wbdv-role">FACULTY</td>
+            <td class="wbdv-actions">
+        <span class="float-right">
+          <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
+          <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
+        </span>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+
+</script>
+
+</body>
+</html>
