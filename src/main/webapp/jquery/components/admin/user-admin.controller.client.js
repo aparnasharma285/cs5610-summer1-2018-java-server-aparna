@@ -3,13 +3,17 @@
     jQuery(main);
 
     var tbody;
-    var createUserForm;
+    var template;
+    var userService = new UserServiceClient();
+
 
     function main() {
 
         tbody = $('tbody');
-        createUserForm = $('.wbdv-form');
+        template = $('.wbdv-template');
         $('.wbdv-create').click(createUser);
+
+        findAllUsers();
     }
 
 
@@ -21,7 +25,6 @@
         var firstName = $('#firstNameFld').val();
         var lastName = $('#lastNameFld').val();
         var role = $('#roleFld').val();
-        var createUrl;
 
         var user = {
 
@@ -32,24 +35,26 @@
             role: role
         };
 
+        userService.createUser(user, role).then(findAllUsers);
+    }
 
-        if (role == "Student") {
-            createUrl = "http://localhost:8080/api/student";
-        } else if (role == "Faculty") {
+    function findAllUsers() {
+        userService.findAllUsers()
+            .then(renderUsers);
+    }
 
-            createUrl = "http://localhost:8080/api/faculty";
-        } else {
-            createUrl = "http://localhost:8080/api/user";
+    function renderUsers(users) {
+
+        tbody.empty();
+        for (var i = 0; i < users.length; i++) {
+            var user = users[i];
+            var clone = template.clone();
+            clone.find('.wbdv-username').html(user.username);
+            clone.find('.wbdv-first-name').html(user.firstName);
+            clone.find('.wbdv-last-name').html(user.lastName);
+            clone.find('.wbdv-role').html(user.role);
+            tbody.append(clone);
+
         }
-
-
-        fetch(createUrl, {
-            method: 'post',
-            body: JSON.stringify(user),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
-
     }
 })();

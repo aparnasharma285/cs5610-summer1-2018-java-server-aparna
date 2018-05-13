@@ -12,6 +12,7 @@
 
     </script>
 
+    <script src="../../services/user.service.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
             <th>Role</th>
             <th>&nbsp;</th>
         </tr>
-        </thead>
+
 
         <tr class="wbdv-form">
             <td><input id="usernameFld" class="form-control" placeholder="Username"></td>
@@ -48,20 +49,22 @@
             </span>
             </td>
         </tr>
+
+        </thead>
+
         <tbody class="wbdv-tbody">
         <tr class="wbdv-template wbdv-user wbdv-hidden">
             <td class="wbdv-username"></td>
             <td>&nbsp;</td>
-            <td class="wbdv-first-name">Ada</td>
-            <td class="wbdv-last-name">Lovelace</td>
-            <td class="wbdv-role">FACULTY</td>
+            <td class="wbdv-first-name">Dummy</td>
+            <td class="wbdv-last-name">Dummy</td>
+            <td class="wbdv-role">Dummy</td>
             <td class="wbdv-actions">
         <span class="float-right">
           <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
           <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
         </span>
             </td>
-
         </tr>
         </tbody>
     </table>

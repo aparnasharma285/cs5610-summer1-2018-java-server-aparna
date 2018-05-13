@@ -21,12 +21,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/api/users")
+    @GetMapping("/api/user")
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }
 
-    @PostMapping("/api/users")
+    @PostMapping("/api/user")
     public User createUser(@RequestBody User user){
 
         return userRepository.save(user);
