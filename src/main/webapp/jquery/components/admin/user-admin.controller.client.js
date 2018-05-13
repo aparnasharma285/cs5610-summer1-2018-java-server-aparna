@@ -1,11 +1,9 @@
 (function () {
 
-    jQuery(main);
-
+    $(main);
     var tbody;
     var template;
     var userService = new UserServiceClient();
-
 
     function main() {
 
@@ -35,7 +33,6 @@
 
 
         var user = {
-
             username: username,
             password: password,
             firstName: firstName,
@@ -130,7 +127,7 @@
             role: role
         };
 
-        userService.updateUser(user).then(findAllUsers);
+        userService.updateUser(user,userId).then(findAllUsers);
     }
 
 
