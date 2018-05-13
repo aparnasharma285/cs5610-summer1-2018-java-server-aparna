@@ -3,10 +3,8 @@ package webdev.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -18,12 +16,15 @@ public class User {
     @Setter
     private int id;
 
+    @Column(unique = true)
     @Getter
     @Setter
+    @NotEmpty(message = "Please provide your username")
     private String username;
 
     @Getter
     @Setter
+    @NotEmpty(message = "Please provide your password")
     private String password;
 
     @Getter

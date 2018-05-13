@@ -12,6 +12,7 @@
         tbody = $('tbody');
         template = $('.wbdv-template');
         $('.wbdv-create').click(createUser);
+        $('.wbdv-update').click(updateUser);
 
         findAllUsers();
     }
@@ -42,7 +43,7 @@
             role: role
         };
 
-        userService.createUser(user, role).then(findAllUsers);
+        userService.createUser(user).then(findAllUsers);
     }
 
     function findAllUsers() {
@@ -62,7 +63,7 @@
             clone.find('.wbdv-last-name').html(user.lastName);
             clone.find('.wbdv-role').html(user.role);
             clone.find('.wbdv-remove').click(deleteUser);
-            clone.find('.wbdv-edit').click(editUser);
+            clone.find('.wbdv-edit').click(populateForm);
             tbody.append(clone);
 
         }
@@ -70,7 +71,6 @@
 
     function deleteUser(event) {
 
-        console.log(event);
         var deleteBtn = $(event.currentTarget);
         var userId = deleteBtn
             .parent()
@@ -83,8 +83,52 @@
             .then(findAllUsers);
     }
 
-    function editUser(event) {
+    function populateForm(event) {
 
-        console.log(event);
+        var editBtn = $(event.currentTarget);
+        var userId = editBtn
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
+        userService
+            .findUserById(userId)
+            .then(function(user){
+                $('#userIdFld').val(userId);
+                $('#usernameFld').val(user.username);
+                $('#passwordFld').val(user.password);
+                $('#firstNameFld').val(user.firstName);
+                $('#lastNameFld').val(user.lastName);
+                $('#roleFld').val(user.role);
+            });
+    }
+
+    function updateUser() {
+
+        var userId = $('#userIdFld').val();
+        var username = $('#usernameFld').val();
+        var password = $('#passwordFld').val();
+        var firstName = $('#firstNameFld').val();
+        var lastName = $('#lastNameFld').val();
+        var role = $('#roleFld').val();
+
+        $('#usernameFld').val('');
+        $('#passwordFld').val('');
+        $('#firstNameFld').val('');
+        $('#lastNameFld').val('');
+        $('#roleFld').val('Faculty');
+
+        var user = {
+
+            id: userId,
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            role: role
+        };
+
+        userService.updateUser(user).then(findAllUsers);
     }
 })();

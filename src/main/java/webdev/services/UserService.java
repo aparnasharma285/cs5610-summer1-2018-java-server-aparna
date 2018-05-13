@@ -23,6 +23,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    @GetMapping("/api/user/{userId}")
+    public User findUserById(@PathVariable("userId") int userId) {
+
+        User user = userRepository.findById(userId).orElse(null);
+        return user;
+    }
+
     @PostMapping("/api/user")
     public User createUser(@RequestBody User user) {
 
@@ -38,6 +45,25 @@ public class UserService {
 
             userRepository.delete(user);
         }
+    }
+
+    @PutMapping("/api/user")
+    public User updateUser(@RequestBody User user) {
+
+        User existingUser = userRepository.findById(user.getId()).orElse(null);
+
+        if (existingUser != null) {
+            existingUser.setUsername(user.getUsername());
+            existingUser.setPassword(user.getPassword());
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setRole(user.getRole());
+
+            return userRepository.save(existingUser);
+        }
+
+        return null;
+
     }
 
 
