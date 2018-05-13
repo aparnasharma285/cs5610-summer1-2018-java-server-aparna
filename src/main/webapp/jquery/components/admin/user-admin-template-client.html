@@ -19,8 +19,8 @@
 <div class="container">
     <h1>User Admin </h1>
 
-    <table class="table table-hover" id="userdata">
-        <thead>
+    <table class="table table-hover table-striped" id="userdata">
+        <thead class="thead-dark">
         <tr class="table-active">
             <th>Username</th>
             <th>Password</th>
@@ -41,11 +41,9 @@
                 <option value="Student">Student</option>
             </select></td>
             <td><span class="float-right" style="white-space: nowrap">
-                <i class="fa fa-search wbdv-search"></i>&nbsp;&nbsp;
-                <i class="fa fa-user-plus wbdv-create"></i>&nbsp;&nbsp;
+                <i class="fa fa-search wbdv-search"></i>&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-user-plus wbdv-create"></i>&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-edit wbdv-update"></i>
-
-
             </span>
             </td>
         </tr>
@@ -61,8 +59,8 @@
             <td class="wbdv-role">Dummy</td>
             <td class="wbdv-actions">
         <span class="float-right">
-          <i id="wbdv-remove" class="fa-2x fa fa-times wbdv-remove"></i>
-          <i id="wbdv-edit" class="fa-2x fa fa-pencil wbdv-edit"></i>
+            <button class="btn btn-primary wbdv-remove"><i class="fa fa fa-times"></i></button>
+            <button class="btn btn-info wbdv-edit"><i class="fa fa fa-pencil"></i></button>
         </span>
             </td>
         </tr>
