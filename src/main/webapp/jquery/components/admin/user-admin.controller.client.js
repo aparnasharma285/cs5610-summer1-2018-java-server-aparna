@@ -13,7 +13,7 @@
         template = $('.wbdv-template');
         $('.wbdv-create').click(createUser);
         $('.wbdv-update').click(updateUser);
-
+        $('.wbdv-search').click(searchUser);
         findAllUsers();
     }
 
@@ -63,7 +63,7 @@
             clone.find('.wbdv-last-name').html(user.lastName);
             clone.find('.wbdv-role').html(user.role);
             clone.find('.wbdv-remove').click(deleteUser);
-            clone.find('.wbdv-edit').click(populateForm);
+            clone.find('.wbdv-edit').click(renderUser);
             tbody.append(clone);
 
         }
@@ -83,7 +83,7 @@
             .then(findAllUsers);
     }
 
-    function populateForm(event) {
+    function renderUser(event) {
 
         var editBtn = $(event.currentTarget);
         var userId = editBtn
@@ -94,7 +94,7 @@
 
         userService
             .findUserById(userId)
-            .then(function(user){
+            .then(function (user) {
                 $('#userIdFld').val(userId);
                 $('#usernameFld').val(user.username);
                 $('#passwordFld').val(user.password);
@@ -113,6 +113,7 @@
         var lastName = $('#lastNameFld').val();
         var role = $('#roleFld').val();
 
+        $('#userIdFld').val('');
         $('#usernameFld').val('');
         $('#passwordFld').val('');
         $('#firstNameFld').val('');
@@ -130,5 +131,34 @@
         };
 
         userService.updateUser(user).then(findAllUsers);
+    }
+
+
+    function searchUser() {
+
+        var username = $('#usernameFld').val();
+        var password = $('#passwordFld').val();
+        var firstName = $('#firstNameFld').val();
+        var lastName = $('#lastNameFld').val();
+        var role = $('#roleFld').val();
+
+        $('#usernameFld').val('');
+        $('#passwordFld').val('');
+        $('#firstNameFld').val('');
+        $('#lastNameFld').val('');
+        $('#roleFld').val('Faculty');
+
+        var user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            role: role
+        };
+
+        userService.searchUser(user)
+            .then(renderUsers)
+            .catch(function (reason) { console.log("couldnt find"); return; });
+
     }
 })();
