@@ -5,6 +5,8 @@ import webdev.models.User;
 import webdev.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +36,26 @@ public class UserService {
 
     @PostMapping("/api/user")
     public User createUser(@RequestBody User user) {
+        User existingUser = userRepository.findUserByUsername(user.getUsername()).orElse(null);
 
-        return userRepository.save(user);
+        if(existingUser == null){
+            return userRepository.save(user);
+        } else return null;
+
     }
+
+
+    @PostMapping("/api/register")
+    public User register(@RequestBody User user, HttpSession session, HttpServletResponse response) {
+        User userExists = userRepository.findUserByUsername(user.getUsername()).orElse(null);
+        if(userExists!=null) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+        } else {
+            return createUser(user);
+        }
+        return null;
+    }
+
 
     @DeleteMapping("/api/user/{userId}")
     public void deleteUser(@PathVariable("userId") int userId) {
@@ -49,10 +68,10 @@ public class UserService {
         }
     }
 
-    @PutMapping("/api/user")
-    public User updateUser(@RequestBody User user) {
+    @PutMapping("/api/user/{userId}")
+    public User updateUser(@RequestBody User user, @PathVariable ("userId") int userId) {
 
-        User existingUser = userRepository.findById(user.getId()).orElse(null);
+        User existingUser = userRepository.findById(userId).orElse(null);
 
         if (existingUser != null) {
             existingUser.setUsername(user.getUsername());
@@ -68,6 +87,10 @@ public class UserService {
 
     }
 
+    @GetMapping("/api/search/user/{username}")
+    public Optional<User> searchByUsername(@PathVariable("username") String usernmae){
+            return userRepository.findUserByUsername(usernmae);
+    }
 
     @PostMapping("/api/search/user")
     public List<User> searchUser(@RequestBody User user) {
@@ -79,18 +102,22 @@ public class UserService {
 
         if ((username.length() > 0) && (password.length() > 0) && (firstName.length() > 0) && (lastName.length() > 0)) {
             if (userRepository.findUserByPrimaryDetails(username, password, firstName, lastName).size() > 0) {
-
                 return userRepository.findUserByPrimaryDetails(username, password, firstName, lastName);
             }
         } else {
             if (username.length() > 0) {
                 if (password.length() > 0) {
-                    if (userRepository.findUserByCredentials(username, password).size()>0) {
-                        return userRepository.findUserByCredentials(username, password);
+                    if (userRepository.findUserByCredentials(username, password).isPresent()) {
+                            List<User> result = new ArrayList<User>();
+                            result.add(userRepository.findUserByCredentials(username, password).get());
+                            return result;
+
                     }
                 } else {
-                    if (userRepository.findUserByUsername(username).size()>0) {
-                        return userRepository.findUserByUsername(username);
+                    if (userRepository.findUserByUsername(username).isPresent()) {
+                        List<User> result = new ArrayList<User>();
+                        result.add(userRepository.findUserByUsername(username).get());
+                        return result;
                     }
                 }
             } else {
