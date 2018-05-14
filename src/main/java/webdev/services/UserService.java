@@ -92,6 +92,19 @@ public class UserService {
             return userRepository.findUserByUsername(usernmae);
     }
 
+    @PostMapping("/api/login")
+    public User login(@RequestBody User user, HttpSession session, HttpServletResponse response){
+
+        User existingUser = userRepository.findUserByCredentials(user.getUsername(),user.getPassword()).orElse(null);
+
+        if(existingUser != null){
+            return existingUser;
+        } else{
+            response.setStatus(404);
+            return null;
+        }
+    }
+
     @PostMapping("/api/search/user")
     public List<User> searchUser(@RequestBody User user) {
         String username = user.getUsername();

@@ -5,7 +5,7 @@
 
     function main() {
 
-        registerForm = $('.card-body');
+        var registerForm = $('.card-body');
         $('.wbdv-register').click(register);
         $('.alert').toggle();
     }

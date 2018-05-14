@@ -1,14 +1,23 @@
-.wbdv-registerForm {
-    margin: 20px;
+body {
+
+    background-image: url("https://www.wallpixa.com/wp-content/uploads/2018/03/Abstract-4k-background-HD-image-blue-bright-blur-43579-2560x1600-1920x1200.jpg");
 }
-.card-header{
-    color: #636363;
-    text-align: center;
-}
+
 .wbdv-registerForm {
+    margin: 30px;
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.card-header {
+    color: #636363;
+    text-align: center;
+}
+
 .wbdv-hidden {
     display: none;
+}
+
+.wbdv-login {
+    color: green;
 }

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/simplex/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="register.style.client.css" rel="stylesheet"/>
-    <title>Register</title>
+    <link href="login.style.client.css" rel="stylesheet"/>
+    <title>Login</title>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -14,36 +14,35 @@
     </script>
 
     <script src="../../services/user.service.client.js"></script>
-    <script src="register.controller.client.js"></script>
+    <script src="login.controller.client.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="card wbdv-registerForm col-md-6">
-            <h2 class="card-header">Register</h2>
+        <div class="card wbdv-loginForm col-md-6">
+            <h2 class="card-header">Sign In</h2>
             <div class="card-body">
-                <div class="alert alert-dismissible alert-primary">
+                <div class="alert alert-dismissible alert-primary wbdv-invalidCredentials">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span></span>
                 </div>
-                <div class="alert alert-dismissible alert-info">
+                <div class="alert alert-dismissible alert-primary wbdv-emptyField">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span></span>
                 </div>
                 <label for="usernameFld" class="col-form-label">Username</label>
                 <input id="usernameFld" placeholder="Alice" class="form-control">
                 <label for="passwordFld" class="col-form-label">Password</label>
-                <input id="passwordFld" placeholder="123qwe#$%" class="form-control" type="password">
-                <label for="verifyPasswordFld" class="col-form-label">Verify Password</label>
-                <input id="verifyPasswordFld" placeholder="123qwe#$%" class="form-control" type="password"><br>
-                <button class="btn btn-info btn-block wbdv-register" width="100%">Sign Up</button><br>
-                <a href="/jquery/components/login/login.template.client.html" class="wbdv-login">Login</a>
+                <input id="passwordFld" placeholder="123qwe#$%" class="form-control" type="password"><br>
+                <button class="btn btn-info btn-block wbdv-login" width="100%">Login</button><br>
+                <a href="" class="wbdv-resetPassword">Forgot Password?</a>
+                <a href="/jquery/components/register/register.template.client.html" class="wbdv-signUp">Sign Up</a>
+
             </div>
         </div>
         <div class="col-md-3"></div>
     </div>
 </div>
-
 </body>
 </html>
