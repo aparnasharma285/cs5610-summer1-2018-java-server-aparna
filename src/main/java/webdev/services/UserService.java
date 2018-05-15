@@ -176,4 +176,10 @@ public class UserService {
 
         return null;
     }
+
+    @GetMapping("/api/reset/{emailId}")
+    public User resetEmail(@PathVariable("emailId") String emailId){
+        return userRepository.findUserByEmail(emailId).orElse(null);
+
+    }
 }

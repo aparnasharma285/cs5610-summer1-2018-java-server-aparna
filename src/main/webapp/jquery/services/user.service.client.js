@@ -5,11 +5,13 @@ function UserServiceClient() {
     this.findUserByUsername = findUserByUsername;
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
+    this.resetEmail= resetEmail;
     this.updateUser = updateUser;
     this.searchUser = searchUser;
     this.register = register;
     this.login = login;
     this.url = '/api/user';
+    this.resetUrl = '/api/reset';
     this.searchUrl = '/api/search/user';
     this.registerUrl = '/api/register';
     this.loginUrl ='/api/login';
@@ -64,6 +66,13 @@ function UserServiceClient() {
 
     function findUserById(userId) {
         return fetch(self.url + '/' + userId)
+            .then(function (response) {
+                return response.json();
+            });
+    }
+
+    function resetEmail(emailId) {
+        return fetch(self.resetUrl + '/' + emailId)
             .then(function (response) {
                 return response.json();
             });

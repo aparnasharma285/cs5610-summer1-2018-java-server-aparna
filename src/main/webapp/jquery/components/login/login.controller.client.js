@@ -6,6 +6,7 @@
     function main() {
         var loginForm = $('.wbdv-loginForm');
         $('.wbdv-login').click(login);
+        $('wbdv-resetPassword').click(resetPassword);
         $('.alert').toggle();
     }
 
@@ -39,5 +40,12 @@
 
             })
         }
+    }
+
+    function resetPassword() {
+
+        var emailId = $('#emailFld').val();
+
+        userService.resetEmail(emailId);
     }
 })();

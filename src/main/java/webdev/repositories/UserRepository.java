@@ -3,6 +3,7 @@ package webdev.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 import webdev.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,6 +15,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u FROM User u WHERE u.username=:username")
     Optional<User> findUserByUsername(@Param("username") String username);
+
+    @Query("SELECT u FROM User u WHERE u.email=:emailId")
+    Optional<User> findUserByEmail(@PathVariable("emailId") String emailId);
 
     @Query("SELECT u FROM User u WHERE u.firstName=:firstName")
     List<User> findUserByFirstName(@Param("firstName") String firstName);
