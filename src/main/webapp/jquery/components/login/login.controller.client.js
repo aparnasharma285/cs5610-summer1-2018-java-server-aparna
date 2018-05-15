@@ -33,7 +33,7 @@
                             return results.json();
                         })
                         .then(function (user) {
-                            window.location.replace("/jquery/components/profile/profile.template.html?id="+user.id);
+                            window.location.replace("/jquery/components/profile/profile.template.client.html?id="+user.id);
                         })
                 }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class UserService {
     public User createUser(@RequestBody User user) {
         User existingUser = userRepository.findUserByUsername(user.getUsername()).orElse(null);
 
-        if(existingUser == null){
+        if (existingUser == null) {
             return userRepository.save(user);
         } else return null;
 
@@ -48,7 +49,7 @@ public class UserService {
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session, HttpServletResponse response) {
         User userExists = userRepository.findUserByUsername(user.getUsername()).orElse(null);
-        if(userExists!=null) {
+        if (userExists != null) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
         } else {
             return createUser(user);
@@ -69,16 +70,36 @@ public class UserService {
     }
 
     @PutMapping("/api/user/{userId}")
-    public User updateUser(@RequestBody User user, @PathVariable ("userId") int userId) {
+    public User updateUser(@RequestBody User user, @PathVariable("userId") int userId) {
 
         User existingUser = userRepository.findById(userId).orElse(null);
 
+        String newUsername = user.getUsername();
+        String newPassword = user.getPassword();
+        String newFirstName = user.getFirstName();
+        String newLastName = user.getLastName();
+        String newRole = user.getRole();
+        String newPhone = user.getPhone();
+        String newEmail = user.getEmail();
+        Date newDob = user.getDateOfBirth();
+
         if (existingUser != null) {
-            existingUser.setUsername(user.getUsername());
-            existingUser.setPassword(user.getPassword());
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setRole(user.getRole());
+            if (newUsername != null) {
+                existingUser.setUsername(newUsername);
+            }
+            if (newPassword != null) {
+                existingUser.setPassword(newPassword);
+            }
+            if (newFirstName != null) {
+                existingUser.setFirstName(newFirstName);
+            }
+            if(newRole != null){
+                existingUser.setRole(newRole);
+            }
+            existingUser.setLastName(newLastName);
+            existingUser.setEmail(newEmail);
+            existingUser.setDateOfBirth(newDob);
+            existingUser.setPhone(newPhone);
 
             return userRepository.save(existingUser);
         }
@@ -88,18 +109,18 @@ public class UserService {
     }
 
     @GetMapping("/api/search/user/{username}")
-    public Optional<User> searchByUsername(@PathVariable("username") String usernmae){
-            return userRepository.findUserByUsername(usernmae);
+    public Optional<User> searchByUsername(@PathVariable("username") String usernmae) {
+        return userRepository.findUserByUsername(usernmae);
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody User user, HttpSession session, HttpServletResponse response){
+    public User login(@RequestBody User user, HttpSession session, HttpServletResponse response) {
 
-        User existingUser = userRepository.findUserByCredentials(user.getUsername(),user.getPassword()).orElse(null);
+        User existingUser = userRepository.findUserByCredentials(user.getUsername(), user.getPassword()).orElse(null);
 
-        if(existingUser != null){
+        if (existingUser != null) {
             return existingUser;
-        } else{
+        } else {
             response.setStatus(404);
             return null;
         }
@@ -121,9 +142,9 @@ public class UserService {
             if (username.length() > 0) {
                 if (password.length() > 0) {
                     if (userRepository.findUserByCredentials(username, password).isPresent()) {
-                            List<User> result = new ArrayList<User>();
-                            result.add(userRepository.findUserByCredentials(username, password).get());
-                            return result;
+                        List<User> result = new ArrayList<User>();
+                        result.add(userRepository.findUserByCredentials(username, password).get());
+                        return result;
 
                     }
                 } else {
@@ -136,15 +157,15 @@ public class UserService {
             } else {
 
                 if (firstName.length() > 0) {
-                    if (userRepository.findUserByFirstName(firstName).size()>0) {
+                    if (userRepository.findUserByFirstName(firstName).size() > 0) {
                         return userRepository.findUserByFirstName(firstName);
                     }
                 } else {
                     if (lastName.length() > 0) {
-                        if (userRepository.findUserByLastName(lastName).size()>0) {
+                        if (userRepository.findUserByLastName(lastName).size() > 0) {
                             return userRepository.findUserByLastName(lastName);
                         }
-                    } else if (userRepository.findUserByRole(role).size()>0) {
+                    } else if (userRepository.findUserByRole(role).size() > 0) {
                         return userRepository.findUserByRole(role);
                     }
                 }

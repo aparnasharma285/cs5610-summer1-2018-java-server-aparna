@@ -9,6 +9,9 @@
 
         tbody = $('tbody');
         template = $('.wbdv-template');
+        $('.wbdv-create').css('cursor', 'pointer');
+        $('.wbdv-update').css('cursor', 'pointer');
+        $('.wbdv-search').css('cursor', 'pointer');
         $('.wbdv-create').click(createUser);
         $('.wbdv-update').click(updateUser);
         $('.wbdv-search').click(searchUser);
@@ -25,11 +28,7 @@
         var lastName = $('#lastNameFld').val();
         var role = $('#roleFld').val();
 
-        $('#usernameFld').val('');
-        $('#passwordFld').val('');
-        $('#firstNameFld').val('');
-        $('#lastNameFld').val('');
-        $('#roleFld').val('Faculty');
+        resetForm();
 
 
         var user = {
@@ -98,6 +97,9 @@
                 $('#firstNameFld').val(user.firstName);
                 $('#lastNameFld').val(user.lastName);
                 $('#roleFld').val(user.role);
+                $('#emailFld').val(user.email);
+                $('#phoneFld').val(user.phone);
+                $('#dobFld').val(user.dateOfBirth);
             });
     }
 
@@ -109,12 +111,19 @@
         var firstName = $('#firstNameFld').val();
         var lastName = $('#lastNameFld').val();
         var role = $('#roleFld').val();
+        var email = $('#emailFld').val();
+        var phone = $('#phoneFld').val();
+        var dob = $('#dobFld').val() ;
+
 
         $('#userIdFld').val('');
         $('#usernameFld').val('');
         $('#passwordFld').val('');
         $('#firstNameFld').val('');
         $('#lastNameFld').val('');
+        $('#emailFld').val('');
+        $('#phoneFld').val('');
+        $('#dobFld').val('');
         $('#roleFld').val('Faculty');
 
         var user = {
@@ -124,10 +133,13 @@
             password: password,
             firstName: firstName,
             lastName: lastName,
+            email: email,
+            phone: phone,
+            dateOfBirth: dob,
             role: role
         };
 
-        userService.updateUser(user,userId).then(findAllUsers);
+        userService.updateUser(user, userId).then(findAllUsers);
     }
 
 
@@ -139,11 +151,7 @@
         var lastName = $('#lastNameFld').val();
         var role = $('#roleFld').val();
 
-        $('#usernameFld').val('');
-        $('#passwordFld').val('');
-        $('#firstNameFld').val('');
-        $('#lastNameFld').val('');
-        $('#roleFld').val('Faculty');
+        resetForm();
 
         var user = {
             username: username,
@@ -155,7 +163,19 @@
 
         userService.searchUser(user)
             .then(renderUsers)
-            .catch(function (reason) { console.log("couldnt find"); return; });
+            .catch(function (reason) {
+                console.log("couldnt find");
+                return;
+            });
+
+    }
+
+    function resetForm() {
+        $('#usernameFld').val('');
+        $('#passwordFld').val('');
+        $('#firstNameFld').val('');
+        $('#lastNameFld').val('');
+        $('#roleFld').val('Faculty');
 
     }
 })();

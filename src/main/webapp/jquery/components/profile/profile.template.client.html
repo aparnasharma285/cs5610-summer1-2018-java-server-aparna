@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/simplex/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+
+    </script>
+    <link href="profile.style.client.css" rel="stylesheet"/>
+    <script src="../../services/user.service.client.js"></script>
+    <script src="profile.controller.client.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
+    <title>Profile</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="card wbdv-profile col-md-6"><br>
+            <div class="alert alert-dismissible alert-info wbdv-updateSuccessful">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <span></span>
+            </div>
+            <br>
+            <h1>Profile</h1>
+            <input type="hidden" id="userIdFld">
+            <label class="control-label" for="usernameFld">Username</label>
+            <input class="form-control" id="usernameFld" type="text" disabled="">
+            <label class="control-label" for="passwordFld">Password</label>
+            <input class="form-control" id="passwordFld" type="password">
+            <label class="control-label" for="emailFld">Email</label>
+            <input class="form-control" id="emailFld" type="text">
+            <label class="control-label" for="phoneFld">Phone</label>
+            <input class="form-control" id="phoneFld" type="text">
+            <label class="control-label" for="roleFld">Role</label>
+            <select id="roleFld" class="form-control">
+                <option value="Faculty">Faculty</option>
+                <option value="Student">Student</option>
+            </select>
+            <label class="control-label" for="datepicker">Date</label>
+            <input type="text" id="datepicker" width="276"><br>
+            <button class="btn btn-success btn-block wbdv-updateProfile" width="100%">
+                <i class="fa fa-edit"></i> Update
+            </button>
+            <br>
+            <button class="btn btn-primary btn-block wbdv-logout" width="100%">
+                <i class="fa fa-sign-out"></i> Logout
+            </button>
+            <br>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</body>
+</html>

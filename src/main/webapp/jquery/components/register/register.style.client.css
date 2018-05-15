@@ -1,8 +1,3 @@
-body {
-
-    background-image: url("https://www.wallpixa.com/wp-content/uploads/2018/03/Abstract-4k-background-HD-image-blue-bright-blur-43579-2560x1600-1920x1200.jpg");
-}
-
 .wbdv-registerForm {
     margin: 30px;
     padding-left: 0px;
@@ -20,4 +15,7 @@ body {
 
 .wbdv-login {
     color: green;
+}
+.card{
+    border-width: thick;
 }

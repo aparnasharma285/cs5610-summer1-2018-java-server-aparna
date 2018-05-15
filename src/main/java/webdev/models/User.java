@@ -1,5 +1,6 @@
 package webdev.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +38,7 @@ public class User {
 
     @Getter
     @Setter
+    @JsonFormat(pattern="MM/dd/yyyy")
     private Date dateOfBirth;
 
     @Getter
