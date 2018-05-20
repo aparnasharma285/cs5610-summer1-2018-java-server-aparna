@@ -34,7 +34,7 @@
                             return results.json();
                         })
                         .then(function (user) {
-                            window.location.replace("/jquery/components/profile/profile.template.client.html?id="+user.id);
+                            window.location.href ="/jquery/components/profile/profile.template.client.html";
                         })
                 }
 

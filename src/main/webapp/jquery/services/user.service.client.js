@@ -5,16 +5,21 @@ function UserServiceClient() {
     this.findUserByUsername = findUserByUsername;
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
-    this.resetEmail= resetEmail;
+    this.resetEmail = resetEmail;
     this.updateUser = updateUser;
     this.searchUser = searchUser;
     this.register = register;
     this.login = login;
+    this.logout = logout;
+    this.getCurrentUser = getCurrentUser;
+
     this.url = '/api/user';
     this.resetUrl = '/api/reset';
     this.searchUrl = '/api/search/user';
     this.registerUrl = '/api/register';
-    this.loginUrl ='/api/login';
+    this.loginUrl = '/api/login';
+    this.profile = '/api/profile';
+    this.sessionInvalidate = '/api/session/invalidate';
     var self = this;
 
     function createUser(user) {
@@ -95,6 +100,7 @@ function UserServiceClient() {
     function register(user) {
         return fetch(self.registerUrl, {
             method: 'post',
+            credentials : 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -104,16 +110,32 @@ function UserServiceClient() {
     }
 
     function findUserByUsername(user, username) {
-        return fetch(self.searchUrl+'/'+username);
+        return fetch(self.searchUrl + '/' + username);
     }
-    
+
     function login(user) {
         return fetch(self.loginUrl, {
             method: 'post',
+            credentials : 'same-origin',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
             }
         });
+    }
+
+    function getCurrentUser(){
+
+        return fetch(self.profile, {method: 'get',
+            credentials : 'same-origin'}).then(function (response) {
+            return response.json();
+        })
+    }
+    
+    
+    function logout() {
+
+        return fetch(self.sessionInvalidate);
+        
     }
 }

@@ -5,6 +5,7 @@ import webdev.models.User;
 import webdev.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -45,13 +46,13 @@ public class UserService {
 
     }
 
-
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session, HttpServletResponse response) {
         User userExists = userRepository.findUserByUsername(user.getUsername()).orElse(null);
         if (userExists != null) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
         } else {
+            session.setAttribute("currentUser", user);
             return createUser(user);
         }
         return null;
@@ -93,7 +94,7 @@ public class UserService {
             if (newFirstName != null) {
                 existingUser.setFirstName(newFirstName);
             }
-            if(newRole != null){
+            if (newRole != null) {
                 existingUser.setRole(newRole);
             }
             existingUser.setLastName(newLastName);
@@ -114,17 +115,19 @@ public class UserService {
     }
 
     @PostMapping("/api/login")
-    public User login(@RequestBody User user, HttpSession session, HttpServletResponse response) {
+    public User login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
 
         User existingUser = userRepository.findUserByCredentials(user.getUsername(), user.getPassword()).orElse(null);
 
         if (existingUser != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("currentUser", existingUser);
             return existingUser;
-        } else {
-            response.setStatus(404);
-            return null;
         }
-    }
+        response.setStatus(404);
+        return null;
+
+}
 
     @PostMapping("/api/search/user")
     public List<User> searchUser(@RequestBody User user) {
@@ -178,8 +181,24 @@ public class UserService {
     }
 
     @GetMapping("/api/reset/{emailId}")
-    public User resetEmail(@PathVariable("emailId") String emailId){
+    public User resetEmail(@PathVariable("emailId") String emailId) {
         return userRepository.findUserByEmail(emailId).orElse(null);
 
     }
+
+
+    @GetMapping("/api/profile")
+    public User profile(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
+        return currentUser;
+    }
+
+    @GetMapping("/api/session/invalidate")
+    public void logoutUser(HttpSession session){
+
+        session.invalidate();
+    }
+
+
 }
