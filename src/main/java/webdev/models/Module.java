@@ -1,14 +1,14 @@
 package webdev.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Course {
+public class Module {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -18,17 +18,13 @@ public class Course {
     @Getter@Setter
     private String title;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @ManyToOne
+    @JsonIgnore
     @Getter@Setter
-    private Date created;
+    private Course course;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @OneToMany(mappedBy="module")
     @Getter@Setter
-    private Date modified;
-
-    @OneToMany(mappedBy="course")
-    @Getter@Setter
-    private List<Module> modules;
-
+    private List<Lesson> lessons;
 
 }
