@@ -64,10 +64,8 @@ public class CourseService {
                 existingCourse.setCreated(created);
             }
 
-            if (modified != null) {
-                existingCourse.setModified(modified);
-            }
 
+            existingCourse.setModified(modified);
             return courseRepository.save(existingCourse);
         }
 

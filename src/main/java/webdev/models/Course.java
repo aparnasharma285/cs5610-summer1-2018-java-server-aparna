@@ -1,7 +1,10 @@
 package webdev.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,12 +21,16 @@ public class Course {
     @Getter@Setter
     private String title;
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Getter@Setter
+    @JsonFormat(pattern="MM/dd/yyyy")
     private Date created;
 
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Getter@Setter
+    @JsonFormat(pattern="MM/dd/yyyy")
     private Date modified;
 
     @OneToMany(mappedBy="course")
