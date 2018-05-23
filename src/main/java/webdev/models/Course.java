@@ -30,7 +30,7 @@ public class Course {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Getter@Setter
-    @JsonFormat(pattern="MM/dd/yyyy")
+    @JsonFormat(pattern="MMMM"+" "+"dd"+", "+"yyyy")
     private Date modified;
 
     @OneToMany(mappedBy="course")
