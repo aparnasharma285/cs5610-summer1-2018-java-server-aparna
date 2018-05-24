@@ -23,7 +23,7 @@ public class Lesson {
     @Getter@Setter
     private Module module;
 
-    @OneToMany(mappedBy="course")
+    @OneToMany(mappedBy="lesson")
     @Getter@Setter
     private List<Topic> topics;
 
