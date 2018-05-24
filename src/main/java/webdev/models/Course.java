@@ -24,13 +24,13 @@ public class Course {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Getter@Setter
-    @JsonFormat(pattern="MM/dd/yyyy")
+    @JsonFormat(pattern="MM/dd/yyyy", timezone = "EST")
     private Date created;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Getter@Setter
-    @JsonFormat(pattern="MMMM"+" "+"dd"+", "+"yyyy")
+    @JsonFormat(pattern="MMMM"+" "+"dd"+", "+"yyyy", timezone = "GMT")
     private Date modified;
 
     @OneToMany(mappedBy="course")

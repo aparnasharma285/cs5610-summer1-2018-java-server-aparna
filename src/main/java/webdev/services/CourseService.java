@@ -72,4 +72,9 @@ public class CourseService {
         return existingCourse;
     }
 
+    @GetMapping("/api/course/sort")
+    public List<Course> sortList(){
+        return courseRepository.sortList();
+    }
+
 }
