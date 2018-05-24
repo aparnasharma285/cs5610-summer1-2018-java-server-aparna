@@ -1,14 +1,13 @@
 package webdev.models;
 
+import javax.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
-
 @Entity
-public class Lesson {
+public class Topic {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,10 +20,5 @@ public class Lesson {
     @ManyToOne
     @JsonIgnore
     @Getter@Setter
-    private Module module;
-
-    @OneToMany(mappedBy="course")
-    @Getter@Setter
-    private List<Topic> topics;
-
+    private Lesson lesson;
 }
