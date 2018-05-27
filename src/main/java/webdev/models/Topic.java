@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 public class Topic {
 
@@ -21,4 +23,8 @@ public class Topic {
     @JsonIgnore
     @Getter@Setter
     private Lesson lesson;
+
+    @OneToMany(mappedBy="topic")
+    @Getter@Setter
+    private List<Widget> widgets;
 }

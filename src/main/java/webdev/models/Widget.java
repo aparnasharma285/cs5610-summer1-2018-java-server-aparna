@@ -1,12 +1,10 @@
 package webdev.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Widget {
@@ -44,4 +42,9 @@ public class Widget {
     @Getter
     @Setter
     String height;
+
+    @ManyToOne
+    @JsonIgnore
+    @Getter@Setter
+    private Topic topic;
 }
