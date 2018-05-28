@@ -8,6 +8,7 @@ import webdev.models.Widget;
 import webdev.repositories.TopicRepository;
 import webdev.repositories.WidgetRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -60,6 +61,18 @@ public class WidgetService {
         }
 
         return null;
+    }
+
+    @PostMapping("api/widget/save")
+    public List<Widget> saveAllWidgets(@RequestBody List<Widget> widgets){
+        List<Widget> newWidgetList = new ArrayList<Widget>();
+
+        widgetRepository.deleteAll();
+        for(Widget widget : widgets){
+            newWidgetList.add(widgetRepository.save(widget));
+        }
+
+        return newWidgetList;
     }
 
     @PutMapping("/api/widget/{widgetId}")
@@ -175,4 +188,5 @@ public class WidgetService {
             widgetRepository.delete(widget);
         }
     }
+
 }
