@@ -35,8 +35,8 @@ public class WidgetService {
         return widgetRepository.findById(widgetId).orElse(null);
     }
 
-    @GetMapping("/api/lesson/{topicId}/widget")
-    public List<Widget> findWidgetByLesson(@PathVariable("topicId") int topicId) {
+    @GetMapping("/api/topic/{topicId}/widget")
+    public List<Widget> findWidgetByTopic(@PathVariable("topicId") int topicId) {
 
         Topic topic = topicRepository.findById(topicId).orElse(null);
 
@@ -48,7 +48,7 @@ public class WidgetService {
         return null;
     }
 
-    @PostMapping("/api/lesson/{topicId}/widget")
+    @PostMapping("/api/topic/{topicId}/widget")
     public Widget createWidget(@PathVariable("topicId") int topicId, @RequestBody Widget widget) {
 
         Topic existingTopc = topicRepository.findById(topicId).orElse(null);
