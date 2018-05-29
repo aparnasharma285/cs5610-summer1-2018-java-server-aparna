@@ -44,9 +44,10 @@ public class Widget {
     @Setter
     String height;
 
+
     @Getter
     @Setter
-    String type;
+    String widgetType;
 
     @Getter
     @Setter
@@ -68,6 +69,7 @@ public class Widget {
     @Getter
     @Setter
     ListType listType;
+
 
     @ManyToOne
     @JsonIgnore

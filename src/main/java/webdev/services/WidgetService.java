@@ -94,7 +94,7 @@ public class WidgetService {
             String style = newWidget.getStyle();
             String width = newWidget.getWidth();
             String height = newWidget.getHeight();
-            String type = newWidget.getType();
+            String type = newWidget.getWidgetType();
             int size = newWidget.getSize();
             String href = newWidget.getHref();
             String src = newWidget.getSrc();
