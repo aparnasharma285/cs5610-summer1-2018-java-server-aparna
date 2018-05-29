@@ -1,8 +1,15 @@
 package webdev.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import webdev.models.Topic;
+import webdev.models.User;
 import webdev.models.Widget;
 
-public interface WidgetRepository extends JpaRepository<Widget,Integer> {
+import java.util.Optional;
 
+public interface WidgetRepository extends JpaRepository<Widget,Integer> {
+    @Query("SELECT u FROM Widget u WHERE u.topic=:topic")
+    void deleteByTopic(@Param("topic") Topic topic);
 }
