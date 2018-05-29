@@ -15,6 +15,7 @@ public class Widget {
     @Setter
     private int id;
 
+    @Column(unique = true)
     @Getter
     @Setter
     String name;
@@ -65,6 +66,7 @@ public class Widget {
     @Setter
     String listItems;
 
+    @Column(columnDefinition = "varchar(32) default 'UNORDERED'")
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
