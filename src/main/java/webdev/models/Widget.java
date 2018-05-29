@@ -70,7 +70,7 @@ public class Widget {
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
-    ListType listType;
+    ListType listType = ListType.UNORDERED;
 
 
     @ManyToOne
