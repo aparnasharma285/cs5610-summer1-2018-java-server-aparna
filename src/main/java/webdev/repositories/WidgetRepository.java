@@ -10,6 +10,5 @@ import webdev.models.Widget;
 import java.util.Optional;
 
 public interface WidgetRepository extends JpaRepository<Widget,Integer> {
-    @Query("SELECT u FROM Widget u WHERE u.topic=:topic")
-    void deleteByTopic(@Param("topic") Topic topic);
+
 }

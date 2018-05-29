@@ -69,7 +69,9 @@ public class WidgetService {
         Topic topic = topicRepository.findById(topicId).orElse(null);
 
         if(topic != null) {
-            widgetRepository.deleteByTopic(topic);
+            for(Widget w: topic.getWidgets()){
+                widgetRepository.delete(w);
+            }
             for (Widget widget : widgets) {
                 widget.setTopic(topic);
                 newWidgetList.add(widgetRepository.save(widget));
