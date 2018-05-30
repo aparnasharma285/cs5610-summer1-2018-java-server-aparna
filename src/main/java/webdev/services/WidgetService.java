@@ -43,7 +43,7 @@ public class WidgetService {
 
         if (topic != null) {
 
-            return topic.getWidgets();
+            return widgetRepository.findSortedWidgetsForTopic(topic);
         }
 
         return null;
@@ -52,11 +52,11 @@ public class WidgetService {
     @PostMapping("/api/topic/{topicId}/widget")
     public Widget createWidget(@PathVariable("topicId") int topicId, @RequestBody Widget widget) {
 
-        Topic existingTopc = topicRepository.findById(topicId).orElse(null);
+        Topic existingTopic = topicRepository.findById(topicId).orElse(null);
 
-        if (existingTopc != null) {
+        if (existingTopic != null) {
 
-            widget.setTopic(existingTopc);
+            widget.setTopic(existingTopic);
             return widgetRepository.save(widget);
         }
 
@@ -72,8 +72,12 @@ public class WidgetService {
             for(Widget w: topic.getWidgets()){
                 widgetRepository.delete(w);
             }
+
+            int orderCount = 1;
             for (Widget widget : widgets) {
                 widget.setTopic(topic);
+                widget.setOrder(orderCount);
+                orderCount++;
                 newWidgetList.add(widgetRepository.save(widget));
             }
         }
