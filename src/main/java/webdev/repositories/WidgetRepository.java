@@ -14,5 +14,5 @@ import java.util.Optional;
 public interface WidgetRepository extends JpaRepository<Widget,Integer> {
 
     @Query("select w from Widget w where w.topic=:topic order by w.order")
-    public List<Widget> findSortedWidgetsForTopic(@PathVariable("topic") Topic topic);
+    public List<Widget> findSortedWidgetsForTopic(@Param("topic") Topic topic);
 }
