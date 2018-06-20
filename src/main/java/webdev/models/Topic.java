@@ -26,5 +26,6 @@ public class Topic {
 
     @OneToMany(mappedBy="topic")
     @Getter@Setter
+    @JsonIgnore
     private List<Widget> widgets;
 }

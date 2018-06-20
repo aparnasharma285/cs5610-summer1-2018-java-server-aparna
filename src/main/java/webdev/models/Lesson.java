@@ -25,6 +25,7 @@ public class Lesson {
 
     @OneToMany(mappedBy="lesson")
     @Getter@Setter
+    @JsonIgnore
     private List<Topic> topics;
 
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials= "true")
 public class WidgetService {
 
     private final WidgetRepository widgetRepository;

@@ -1,6 +1,7 @@
 package webdev.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,7 +36,7 @@ public class Course {
 
     @OneToMany(mappedBy="course")
     @Getter@Setter
+    @JsonIgnore
     private List<Module> modules;
-
 
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600, allowCredentials= "true")
 public class CourseService {
 
     private final CourseRepository courseRepository;
